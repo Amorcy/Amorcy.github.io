@@ -5,23 +5,24 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="dns-prefetch" href="http://amorcy.github.io">
-  <title>浅析WebSocket | Amorcy</title>
+  <link rel="dns-prefetch" href="http://amorcy.cc">
+  <title>浅析WebSocket（二） | Amorcy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。 长连接在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用">
+  <meta name="description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
 <meta name="keywords" content="前端, jquery, avalon, vue, nginx, 移动端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅析WebSocket">
-<meta property="og:url" content="http://amorcy.github.io/2018/11/14/webSocket/index.html">
+<meta property="og:title" content="浅析WebSocket（二）">
+<meta property="og:url" content="http://amorcy.cc/2018/11/15/webSocket-2/index.html">
 <meta property="og:site_name" content="Amorcy">
-<meta property="og:description" content="在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。 长连接在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用">
+<meta property="og:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-15T04:31:21.873Z">
+<meta property="og:image" content="http://amorcy.cc/img/websocket/wsReqH.jpeg">
+<meta property="og:image" content="http://amorcy.cc/img/websocket/wsResH.jpeg">
+<meta property="og:updated_time" content="2018-11-15T08:59:35.057Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅析WebSocket">
-<meta name="twitter:description" content="在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。 长连接在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用">
-  
-    <link rel="alternative" href="/atom.xml" title="Amorcy" type="application/atom+xml">
+<meta name="twitter:title" content="浅析WebSocket（二）">
+<meta name="twitter:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
+<meta name="twitter:image" content="http://amorcy.cc/img/websocket/wsReqH.jpeg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -54,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">Amorcy</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">喜欢各种花里胡哨~~</p>
+		<p class="header-subtitle">努力向前的FE</p>
 		
 
 		<nav class="header-menu">
@@ -62,7 +63,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/photo">相册</a></li>
 	        
 			</ul>
 		</nav>
@@ -86,7 +87,7 @@
 				
 					<a class="github" target="_blank" href="https://github.com/Amorcy" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="mail" target="_blank" href="mailto:yangcheng0113@163.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -110,7 +111,7 @@
 			  <h1 class="header-author js-header-author">Amorcy</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>喜欢各种花里胡哨~~<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>努力向前的FE<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -125,7 +126,7 @@
 					
 						<a class="github" target="_blank" href="https://github.com/Amorcy" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="mail" target="_blank" href="mailto:yangcheng0113@163.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -136,7 +137,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/photo">相册</a></li>
 		        
 				</ul>
 			</nav>
@@ -151,29 +152,62 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-webSocket" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-webSocket-2" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      浅析WebSocket
+      浅析WebSocket（二）
     </h1>
   
 
         
-        <a href="/2018/11/14/webSocket/" class="archive-article-date">
-  	<time datetime="2018-11-14T12:58:23.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-14</time>
+        <a href="/2018/11/15/webSocket-2/" class="archive-article-date">
+  	<time datetime="2018-11-15T08:10:31.913Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。</p>
-<h3 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h3><p>在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用之前的连接，跟服务器交互，且在这个请求完成之后服务端会重新开始计时。要是在这个时长内，客户端没有发起请求，那么这个连接会中断，之后的请求会重新建立一个连接。<br>长连接的有点就在于它减少了连接请求，降低了TCP阻塞，且减少了延迟，实时性比较好。而它的缺点就是它会在完成一次请求之后，保持连接，而有可能这个连接是没必要的从而影响性能，而且如果客户端保持了大量的长连接没有被中断，那么对于后端的负载是相当大的，此时后端人员可以做一些限制，如：限制长连接保持的最大个数、关闭一些长时间没有响应的连接从而避免服务器受损，</p>
-<h3 id="短连接"><a href="#短连接" class="headerlink" title="短连接"></a>短连接</h3><p>在HTTP1.0，默认是短连接的。短连接就是指，客户端发起请求，服务端接收请求，两端建立连接，服务端响应资源，连接中断。短连接对于服务器来说管理较为简单，存在的连接都是有用的连接，不需要额外的控制手段。但如果客户请求频繁，将在TCP的建立和关闭操作上浪费较多时间和带宽。</p>
+        <p>在上一篇文章<a href="//amorcy.cc//2018/11/14/webSocket-1/">浅析WebSocket（一）</a>，我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实时的被推送到页面上，非常适合处理体育比赛的分数跟股票。它有两种实现方式，一种就是我们之前提到的长轮询，还有一种是HTTP流，感兴趣的同学可以参考<a href="https://www.ibm.com/developerworks/cn/web/wa-lo-comet/index.html" target="_blank" rel="noopener">传送门</a>了解它是如何实现的。</p>
+<hr>
+<p>WebSocket通信协议包含两个高层组件：开发性的HTTP握手用于协商连接参数、二进制消息分帧机制用于支持低开销的基于消息的文本和二进制数据传输。WebSocket 协议尝试在既有HTTP 基础设施中实现双向HTTP 通信，因此也使用HTTP 的80 和443 端口。不过，这个设计不限于通过HTTP 实现WebSocket 通信，未来的实现可以在某个专用端口上使用更简单的握手，而不必重新定义一个协议。WebSocket 协议是一个独立完善的协议，可以在浏览器之外实现。不过，它的主要应用目标还是实现浏览器应用的双向通信。</p>
+<hr>
+<p>我们首先看下WebSocket的请求头报文与相应头报文来进一步了解WebSocket的高层组件之一：开发性的HTTP握手</p>
+<blockquote>
+<p>Request Headers</p>
+</blockquote>
+<p><img src="/img/websocket/wsReqH.jpeg" alt="image"></p>
+<p>观察以上面请求头我们可以看到</p>
+<ol>
+<li>第4行Connection：HTTP1.1中规定Upgrade只能应用在直连连接中。带有Upgrade头的     HTTP1.1消息必须含有Connection头，因为Connection头的意义就是，任何接收到此消     息的人（通常为代理服务器）都要在转发此消息之前处理掉Connection中指定的域（不转     发此Upgrade域）</li>
+<li>第12行Upgrade是HTTP1.1中用于定义转换协议的header域。如果server支持的话，client希望使用建立好的HTTP(TCP)连接，切换到WebSocket协议</li>
+<li>第8行Sec-WebSocket-Extensions是客户端用来与服务端协商扩展协议的字段，permessage-deflate表示协商是否使用传输数据压缩，client_max_window_bits表示采用LZ77压缩算法时，滑动窗口相关的SIZE大小</li>
+<li>第9行Sec-WebSocket-Key是一个Base64encode的值，这个是客户端随机生成的，用于服务端的验证，服务器会使用此字段组装成另一个key值放在握手返回信息里发送客户端</li>
+<li>第10行Sec_WebSocket-Protocol是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的协议，标识了客户端支持的子协议的列表</li>
+<li>第11行Sec-WebSocket-Version标识了客户端支持的WebSocket协议的版本列表</li>
+</ol>
+<blockquote>
+<p>Response Headers</p>
+</blockquote>
+<p><img src="/img/websocket/wsResH.jpeg" alt="image"></p>
+<p>观察以上面请求头我们可以看到</p>
+<ol>
+<li>第1行Connection字段value值同样为upgrade, 既升级协议</li>
+<li>第6行则定义了升级协议为WebSocket</li>
+<li>第3行Sec-WebSocket-Accept，是客户端校验服务端是否支持WebSocket协议的字段，它的生成过程为：<br>将请求头中的Sec-WebSocket-Key与协议中已定义的一个GUID“258EAFA5-E914-47DA-95CA-C5AB0DC85B11”进行拼接，然后将这个生成的字符串进行SHA1编码，之后生成的字符串进行Base64编码。客户端通过验证服务端返Sec-WebSocket-Accep的值, 来确定两件事情:</li>
+</ol>
+<ul>
+<li>服务端是否理解WebSocket协议, 如果服务端不理解,那么它就不会返回正确的Sec-WebSocket-Accept，则建立WebSocket连接失败</li>
+<li>服务端返回的Response是对于客户端的此次请求的,而不是之前的缓存。 主要是防止有些缓存服务器返回缓存的Response</li>
+</ul>
+<hr>
+<p>以上请求头跟响应头如果主要字段都没有出差错，那么本次连接则从HTTP连接升级到了WebSocket连接了。现在客户端就可以通过WebSocketAPI来接收服务端推送的消息了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 创建WebSocket连接</span><br><span class="line">const ws = new WebSocket(&apos;ws://WebSocket-example:8081&apos;)</span><br><span class="line">const reader = new FileReader()</span><br><span class="line">// 错误处理</span><br><span class="line">ws.onerror = (err) =&gt; &#123;</span><br><span class="line">  // todo</span><br><span class="line">&#125;</span><br><span class="line">// 连接建立是调用</span><br><span class="line">ws.onopen = () =&gt; &#123;</span><br><span class="line">  // 向server发送消息</span><br><span class="line">  ws.send(&apos;connected&apos;)</span><br><span class="line">&#125;</span><br><span class="line">// 接收server发送的消息</span><br><span class="line">ws.onmessage = (msg) =&gt; &#123;</span><br><span class="line">  // todo</span><br><span class="line">  if (msg.data instanceof Blob) &#123;</span><br><span class="line">    // 处理二进制信息</span><br><span class="line">    reader.readAsText(msg.data, &apos;UTF-8&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//关闭时调用</span><br><span class="line">ws.onclose = () =&gt; &#123;</span><br><span class="line">  // todo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>之前前端er便可以愉快的接收服务端主动推送的消息啦~~<br>但是有个问题：很多现有的HTTP 中间设备可能不理解新的WebSocket 协议，而这可能导致各种问题：盲目的连接升级、意外缓冲WebSocket 帧、不明就里地修改内容、把WebSocket 流量误当作不完整的HTTP 通信，等等。这时WSS（<strong>WSS协议表示使用加密信道通信，基于SSL的安全传输，占用与tls相同的443端口</strong>）就提供了一种不错的解决方案，它建立一条端到端的安全通道，这个端到端的加密隧道对中间设备模糊了数据，因此中间设备就不能再感知到数据内容，也就无法再对请求做特殊处理。</p>
 
       
 
@@ -190,6 +224,11 @@
                   <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/WeChatPay.jpeg">
+                      <span class="reward-type">微信</span>
+                    </div>
                     
                   </div>
                 </span>
@@ -208,57 +247,6 @@
       
 
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://amorcy.github.io/2018/11/14/webSocket/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
       <div class="clearfix"></div>
     </div>
   </div>
@@ -267,15 +255,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/11/14/hello-blog/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Amorcy Blog
-        
-      </div>
-    </a>
   
+    <a href="/2018/11/14/webSocket-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅析WebSocket（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -333,7 +317,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
