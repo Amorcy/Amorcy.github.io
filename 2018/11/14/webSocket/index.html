@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://amorcy.cc">
-  <title>Hello World | Amorcy</title>
+  <title>浅析WebSocket | Amorcy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。 长连接在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用">
 <meta name="keywords" content="前端, jquery, avalon, vue, nginx, 移动端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
+<meta property="og:title" content="浅析WebSocket">
 <meta property="og:url" content="http://amorcy.cc/2018/11/14/webSocket/index.html">
 <meta property="og:site_name" content="Amorcy">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。 长连接在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-14T12:59:03.119Z">
+<meta property="og:updated_time" content="2018-11-15T03:53:43.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="浅析WebSocket">
+<meta name="twitter:description" content="在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。 长连接在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用">
   
     <link rel="alternative" href="/atom.xml" title="Amorcy" type="application/atom+xml">
   
@@ -48,7 +48,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="https://avatars0.githubusercontent.com/u/22048325?s=400&amp;u=30042905f4b8365248f6ddd4d100b8c6e0bd3780&amp;v=4" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Amorcy</a></h1>
@@ -104,7 +104,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="https://avatars0.githubusercontent.com/u/22048325?s=400&amp;u=30042905f4b8365248f6ddd4d100b8c6e0bd3780&amp;v=4" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Amorcy</h1>
@@ -158,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      浅析WebSocket
     </h1>
   
 
@@ -171,15 +171,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>在了解WebSocket之前，我们首先需要知道长连接，短连接，长轮询及短轮询。</p>
+<h3 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h3><p>在HTTP1.1，请求头中有字段Connection: keep-alive，既表示开启长连接，在开启长连接之后，客户端发送请求，服务端接收请求，双方建立连接，在服务端完成一次请求之后，这个链接不会立马中断，服务端会设置一个时长，在这个时长内，要是客户端再次发起一个请求，那么这个请求不会重新建立一个连接，而是延用之前的连接，跟服务器交互，且在这个请求完成之后服务端会重新开始计时。要是在这个时长内，客户端没有发起请求，那么这个连接会中断，之后的请求会重新建立一个连接。<br>长连接的有点就在于它减少了连接请求，降低了TCP阻塞，且减少了延迟，实时性比较好。而它的缺点就是它会在完成一次请求之后，保持连接，而有可能这个连接是没必要的从而影响性能，而且如果客户端保持了大量的长连接没有被中断，那么对于后端的负载是相当大的，此时后端人员可以做一些限制，如：限制长连接保持的最大个数、关闭一些长时间没有响应的连接从而避免服务器受损，</p>
+<h3 id="短连接"><a href="#短连接" class="headerlink" title="短连接"></a>短连接</h3><p>在HTTP1.0，默认是短连接的。短连接就是指，客户端发起请求，服务端接收请求，两端建立连接，服务端响应资源，连接中断。短连接对于服务器来说管理较为简单，存在的连接都是有用的连接，不需要额外的控制手段。但如果客户请求频繁，将在TCP的建立和关闭操作上浪费较多时间和带宽。</p>
 
       
 
@@ -273,11 +267,15 @@
   
 <nav id="article-nav">
   
-  
-    <a href="/2018/11/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2018/11/14/hello-blog/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Amorcy Blog
+        
+      </div>
     </a>
+  
   
 </nav>
 
