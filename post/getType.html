@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//amorcy.cc">
-  <title>通过JS获取网络类型，及当前所在系统类型 | Amorcy</title>
+  <title>通过JS获取网络类型,及当前所在系统类型 | Amorcy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。1234567891011121314151617181920212223242526function getNetworkType() &amp;#123;    const ua =">
 <meta name="keywords" content="前端,JS,移动端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="通过JS获取网络类型，及当前所在系统类型">
+<meta property="og:title" content="通过JS获取网络类型,及当前所在系统类型">
 <meta property="og:url" content="//amorcy.cc/post/getType.html">
 <meta property="og:site_name" content="Amorcy">
 <meta property="og:description" content="最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。1234567891011121314151617181920212223242526function getNetworkType() &amp;#123;    const ua =">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-16T03:54:21.785Z">
+<meta property="og:updated_time" content="2018-11-16T06:13:50.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="通过JS获取网络类型，及当前所在系统类型">
+<meta name="twitter:title" content="通过JS获取网络类型,及当前所在系统类型">
 <meta name="twitter:description" content="最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。1234567891011121314151617181920212223242526function getNetworkType() &amp;#123;    const ua =">
   
   
@@ -156,7 +156,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      通过JS获取网络类型，及当前所在系统类型
+      通过JS获取网络类型,及当前所在系统类型
     </h1>
   
 
@@ -171,7 +171,7 @@
       
         <p>最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。<br>于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNetworkType</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">  <span class="keyword">const</span> ua = navigator.userAgent;  </span><br><span class="line">  <span class="keyword">let</span> networkStr = ua.match(<span class="regexp">/NetType\/\w+/</span>) ? ua.match(<span class="regexp">/NetType\/\w+/</span>[<span class="number">0</span>]:<span class="string">'NetType/other'</span>;  </span><br><span class="line">  networkStr = networkStr.toLowerCase().replace(<span class="string">'nettype/'</span>, <span class="string">''</span>);  </span><br><span class="line">  <span class="keyword">let</span> networkType;  </span><br><span class="line">  <span class="keyword">switch</span> (networkStr) &#123;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'wifi'</span>:  </span><br><span class="line">          networkType = <span class="string">'wifi'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'4g'</span>:  </span><br><span class="line">          networkType = <span class="string">'4g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'3g'</span>:  </span><br><span class="line">          networkType = <span class="string">'3g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'3gnet'</span>:  </span><br><span class="line">          networkType = <span class="string">'3g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'2g'</span>:  </span><br><span class="line">          networkType = <span class="string">'2g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">default</span>:  </span><br><span class="line">          networkType = <span class="string">'other'</span>; </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> networkType;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>接下来继续判断用户所在系统是Android还是IOS,且用户是否在浏览器中。<br>由于这个项目是嵌入在APP当中,所以如果要判断用户当前是否是在APP当中,则需要Android和IOS工程师在打壳的时候修改userAgent,加入我们想要的字段。<br>以下是Android打壳时候的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.userAgent = &apos;xxx&apos;</span><br></pre></td></tr></table></figure></p>
+<p>接下来继续判断用户所在系统是Android还是IOS,且用户是否在浏览器中。<br>由于这个项目是嵌入在APP当中,所以如果要判断用户当前是否是在APP当中,则需要Android和IOS工程师在打壳的时候修改userAgent,加入我们想要的字段。<br>以下是Android打壳时候的代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initWebViewGlobalSettings</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String userAgent = webSettings.getUserAgentString();</span><br><span class="line">    userAgent = userAgent + <span class="string">"xxx"</span> + VersionUtils.getVersionName(<span class="keyword">this</span>) + <span class="string">"$"</span>;</span><br><span class="line">    webSettings.setUserAgentString(userAgent);</span><br><span class="line">    mWebView.getSettings().setUserAgentString(userAgent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>端工程师帮我们修改完userAgent之后我们便可以来做判断了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isApp = <span class="regexp">/xxxx/i</span>.test(<span class="built_in">window</span>.navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isAndroid = <span class="regexp">/android/i</span>.test(<span class="built_in">window</span>.navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isIOS = <span class="regexp">/ios/i</span>.test(<span class="built_in">window</span>.navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isWeixin = <span class="regexp">/micromessenger/i</span>.test(navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isWeChat = isWeixin</span><br></pre></td></tr></table></figure></p>
 <p>至此,用以上两个方法便可完成依据网络状况及系统类型的一些需求了。</p>
 
@@ -351,6 +351,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -360,10 +364,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">移动端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
