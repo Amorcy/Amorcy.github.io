@@ -33,20 +33,20 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?39d6c2098c8010182f00952ab06cd70d";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 </html>
-<body>
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?39d6c2098c8010182f00952ab06cd70d";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-        
+<body>      
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
@@ -55,7 +55,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://avatars0.githubusercontent.com/u/22048325?s=400&amp;u=30042905f4b8365248f6ddd4d100b8c6e0bd3780&amp;v=4" class="js-avatar">
+			<img src="/img/avatar.jpeg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Amorcy</a></h1>
@@ -111,7 +111,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://avatars0.githubusercontent.com/u/22048325?s=400&amp;u=30042905f4b8365248f6ddd4d100b8c6e0bd3780&amp;v=4" class="js-avatar">
+				<img src="/img/avatar.jpeg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Amorcy</h1>
@@ -400,6 +400,96 @@
 
 
   
+    <article id="post-vue-router_1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/vue-router_1.html">使用webpack.require优化vue项目的路由</a>
+    </h1>
+  
+
+        
+        <a href="/post/vue-router_1.html" class="archive-article-date">
+  	<time datetime="2017-11-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用Vue做后台管理项目的时候，项目前期,只需要维护几个路由页面即可。<br>在<code>router.js</code>文件中使用以下写法即可。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Login = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/components/login/login'</span>);       </span><br><span class="line"><span class="keyword">const</span> Index = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/components/home/index'</span>);     </span><br><span class="line"><span class="comment">// balabala.......前期少量的路由                        </span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;                                        </span><br><span class="line">routes: [ </span><br><span class="line">    &#123;                               </span><br><span class="line">      path: <span class="string">'/login'</span>,                     </span><br><span class="line">      name: <span class="string">'Login'</span>,                   </span><br><span class="line">      component: Login,                 </span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;                     </span><br><span class="line">      path: <span class="string">'/home'</span>,                </span><br><span class="line">      redirect: <span class="string">'/operation/info/list'</span>,                  </span><br><span class="line">      name: <span class="string">'home'</span>,</span><br><span class="line">    &#125;,                      </span><br><span class="line">    <span class="comment">//balabala..........前期少量的路由     </span></span><br><span class="line">    ])</span><br></pre></td></tr></table></figure></p>
+<p>但是到了项目后期,需求越来越多,需要维护的路由也越来越多的时候,继续使用以上方法就会显得比较臃肿。<br><img src="/img/vue-router_1/router_1.jpeg" alt="image"><br>看右侧栏我们不难发现这个项目,是多么的臃肿,难以维护。<br>当时我们的这个项目需要维护两百多个页面,维护一个<code>router.js</code>文件,在团队协作的时候同时修改此文件容易冲突。这时候我们需要一种方法来让我们不去维护一个<code>router.js</code>文件,而是自动匹配文件夹下的文件去自动生成router。<br>当时给出的解决方法便是使用<a href="https://webpack.js.org/guides/dependency-management/#require-context" target="_blank" rel="noopener"><code>require.context()</code></a>这个由webpack提供的方法来去中心化管理前端路由。<br><code>require.context(directory, includeSubdirs, filter)</code>三个参数。</p>
+<ul>
+<li>directory: 第一个参数[String],指的是要检索的文件路径, 这个参数为必传参数</li>
+<li>includeSubdirs: 第二个参数[Boolean],指是否检索子目录, 这个参数为可选参数, 默认为true</li>
+<li>filter: 第三个参数[RegExp],需要传入一个正则表达式来匹配被检索目录下符合正则的文件,这个参数为可选参数<br>我们了解到这个方法的参数及功能之后,便可以编写方法来自动维护<strong>router</strong>了。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*eslint-disable*/</span></span><br><span class="line"><span class="keyword">import</span> index <span class="keyword">from</span> <span class="string">'./index'</span></span><br><span class="line"><span class="keyword">import</span> login <span class="keyword">from</span> <span class="string">'./login'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> router = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/login'</span>,</span><br><span class="line">    name: <span class="string">'login'</span>,</span><br><span class="line">    component: Login,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    name: <span class="string">'index'</span>,</span><br><span class="line">    component: index,</span><br><span class="line">    chirldren: getRouter(),</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRouter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> context = <span class="built_in">require</span>.context(<span class="string">'../pages'</span>, <span class="literal">true</span>, /.vue/)</span><br><span class="line">  <span class="keyword">var</span> hashArr = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, list = context.keys(); i &lt; list.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> hash = &#123;</span><br><span class="line">      name: <span class="string">`<span class="subst">$&#123;list[i].replace(<span class="regexp">/\.\//</span>, <span class="string">''</span>).replace(<span class="regexp">/\.vue/</span>, <span class="string">''</span>).split(<span class="string">'/'</span>)[<span class="number">0</span>]&#125;</span>`</span>,</span><br><span class="line">      path: <span class="string">`<span class="subst">$&#123;list[i].replace(<span class="regexp">/\.\//</span>, <span class="string">''</span>).replace(<span class="regexp">/\.vue/</span>, <span class="string">''</span>).split(<span class="string">'/'</span>)[<span class="number">0</span>]&#125;</span>`</span>,</span><br><span class="line">      component: <span class="string">`../pages<span class="subst">$&#123;list[i].replace(<span class="regexp">/\./</span>, <span class="string">''</span>)&#125;</span>`</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    hashArr.push(hash)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> hashArr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当时编写了类似上面的方法,这个方法有些局限性,就是对于<code>page</code>目录底下的文件夹的命名则需要非常规范,因为这个路由会直接根据<code>page</code>下的文件夹命名来生成。<br>之后想到好的方法,会继续更新。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">VueRouter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/vue-router_1.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -494,9 +584,18 @@
     	<div class="footer-left">
     		&copy; 2018 Amorcy
     	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+			<div class="footer-left">
+          &nbsp;© 
+          <span id="busuanzi_container_site_pv" style="display: inline;">
+            本站访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          <span id="busuanzi_container_site_uv" style="display: inline;">
+            访客数<span id="busuanzi_value_site_uv"></span>人
+          </span>
+        </div>
+			<div class="footer-right">
+				<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+			</div>
     </div>
   </div>
 </footer>
@@ -579,6 +678,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
@@ -587,11 +694,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
+                <a href="javascript:void(0)" class="js-tag color5">VueRouter</a>
               </li>
             
             <div class="clearfix"></div>
