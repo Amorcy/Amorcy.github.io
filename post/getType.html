@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//amorcy.cc">
-  <title>浅析WebSocket（二） | Amorcy</title>
+  <title>通过JS获取网络类型，及当前所在系统类型 | Amorcy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
-<meta name="keywords" content="前端,WebSocket">
+  <meta name="description" content="最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。1234567891011121314151617181920212223242526function getNetworkType() &amp;#123;    const ua =">
+<meta name="keywords" content="前端,JS,移动端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅析WebSocket（二）">
-<meta property="og:url" content="//amorcy.cc/post/webSocket-2.html">
+<meta property="og:title" content="通过JS获取网络类型，及当前所在系统类型">
+<meta property="og:url" content="//amorcy.cc/post/getType.html">
 <meta property="og:site_name" content="Amorcy">
-<meta property="og:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
+<meta property="og:description" content="最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。1234567891011121314151617181920212223242526function getNetworkType() &amp;#123;    const ua =">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="//amorcy.cc/img/websocket/wsReqH.jpeg">
-<meta property="og:image" content="//amorcy.cc/img/websocket/wsResH.jpeg">
-<meta property="og:updated_time" content="2018-11-16T03:28:45.495Z">
+<meta property="og:updated_time" content="2018-11-16T03:54:21.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅析WebSocket（二）">
-<meta name="twitter:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
-<meta name="twitter:image" content="//amorcy.cc/img/websocket/wsReqH.jpeg">
+<meta name="twitter:title" content="通过JS获取网络类型，及当前所在系统类型">
+<meta name="twitter:description" content="最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。1234567891011121314151617181920212223242526function getNetworkType() &amp;#123;    const ua =">
   
   
     <link rel="icon" href="/img/favicon.jpeg">
@@ -152,63 +149,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-webSocket-2" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-getType" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      浅析WebSocket（二）
+      通过JS获取网络类型，及当前所在系统类型
     </h1>
   
 
         
-        <a href="/post/webSocket-2.html" class="archive-article-date">
-  	<time datetime="2018-11-15T08:10:31.913Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
+        <a href="/post/getType.html" class="archive-article-date">
+  	<time datetime="2018-04-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在上一篇文章<a href="//amorcy.cc//2018/11/14/webSocket-1/">浅析WebSocket（一）</a>，我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实时的被推送到页面上，非常适合处理体育比赛的分数跟股票。它有两种实现方式，一种就是我们之前提到的长轮询，还有一种是HTTP流，感兴趣的同学可以参考<a href="https://www.ibm.com/developerworks/cn/web/wa-lo-comet/index.html" target="_blank" rel="noopener">传送门</a>了解它是如何实现的。</p>
+        <p>最近做移动端项目(Hybird)，PM要求前端通过判断网络类型以及是否在浏览器中判断用户在点击下载链接的时候，提醒用户是直接下载，还是切换网络之后下载。<br>于是写了以下方法判断网络类型,主要也是利用userAgent来做判断。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNetworkType</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">  <span class="keyword">const</span> ua = navigator.userAgent;  </span><br><span class="line">  <span class="keyword">let</span> networkStr = ua.match(<span class="regexp">/NetType\/\w+/</span>) ? ua.match(<span class="regexp">/NetType\/\w+/</span>[<span class="number">0</span>]:<span class="string">'NetType/other'</span>;  </span><br><span class="line">  networkStr = networkStr.toLowerCase().replace(<span class="string">'nettype/'</span>, <span class="string">''</span>);  </span><br><span class="line">  <span class="keyword">let</span> networkType;  </span><br><span class="line">  <span class="keyword">switch</span> (networkStr) &#123;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'wifi'</span>:  </span><br><span class="line">          networkType = <span class="string">'wifi'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'4g'</span>:  </span><br><span class="line">          networkType = <span class="string">'4g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'3g'</span>:  </span><br><span class="line">          networkType = <span class="string">'3g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'3gnet'</span>:  </span><br><span class="line">          networkType = <span class="string">'3g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">case</span> <span class="string">'2g'</span>:  </span><br><span class="line">          networkType = <span class="string">'2g'</span>;  </span><br><span class="line">          <span class="keyword">break</span>;  </span><br><span class="line">      <span class="keyword">default</span>:  </span><br><span class="line">          networkType = <span class="string">'other'</span>; </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> networkType;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<hr>
-<p>WebSocket通信协议包含两个高层组件：开发性的HTTP握手用于协商连接参数、二进制消息分帧机制用于支持低开销的基于消息的文本和二进制数据传输。WebSocket 协议尝试在既有HTTP 基础设施中实现双向HTTP 通信，因此也使用HTTP 的80 和443 端口。不过，这个设计不限于通过HTTP 实现WebSocket 通信，未来的实现可以在某个专用端口上使用更简单的握手，而不必重新定义一个协议。WebSocket 协议是一个独立完善的协议，可以在浏览器之外实现。不过，它的主要应用目标还是实现浏览器应用的双向通信。</p>
-<hr>
-<p>我们首先看下WebSocket的请求头报文与相应头报文来进一步了解WebSocket的高层组件之一：开发性的HTTP握手</p>
-<blockquote>
-<p>Request Headers</p>
-</blockquote>
-<p><img src="/img/websocket/wsReqH.jpeg" alt="image"></p>
-<p>观察以上面请求头我们可以看到</p>
-<ol>
-<li>第4行Connection：HTTP1.1中规定Upgrade只能应用在直连连接中。带有Upgrade头的     HTTP1.1消息必须含有Connection头，因为Connection头的意义就是，任何接收到此消     息的人（通常为代理服务器）都要在转发此消息之前处理掉Connection中指定的域（不转     发此Upgrade域）</li>
-<li>第12行Upgrade是HTTP1.1中用于定义转换协议的header域。如果server支持的话，client希望使用建立好的HTTP(TCP)连接，切换到WebSocket协议</li>
-<li>第8行Sec-WebSocket-Extensions是客户端用来与服务端协商扩展协议的字段，permessage-deflate表示协商是否使用传输数据压缩，client_max_window_bits表示采用LZ77压缩算法时，滑动窗口相关的SIZE大小</li>
-<li>第9行Sec-WebSocket-Key是一个Base64encode的值，这个是客户端随机生成的，用于服务端的验证，服务器会使用此字段组装成另一个key值放在握手返回信息里发送客户端</li>
-<li>第10行Sec_WebSocket-Protocol是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的协议，标识了客户端支持的子协议的列表</li>
-<li>第11行Sec-WebSocket-Version标识了客户端支持的WebSocket协议的版本列表</li>
-</ol>
-<blockquote>
-<p>Response Headers</p>
-</blockquote>
-<p><img src="/img/websocket/wsResH.jpeg" alt="image"></p>
-<p>观察以上面请求头我们可以看到</p>
-<ol>
-<li>第1行Connection字段value值同样为upgrade, 既升级协议</li>
-<li>第6行则定义了升级协议为WebSocket</li>
-<li>第3行Sec-WebSocket-Accept，是客户端校验服务端是否支持WebSocket协议的字段，它的生成过程为：<br>将请求头中的Sec-WebSocket-Key与协议中已定义的一个GUID“258EAFA5-E914-47DA-95CA-C5AB0DC85B11”进行拼接，然后将这个生成的字符串进行SHA1编码，之后生成的字符串进行Base64编码。客户端通过验证服务端返Sec-WebSocket-Accep的值, 来确定两件事情:</li>
-</ol>
-<ul>
-<li>服务端是否理解WebSocket协议, 如果服务端不理解,那么它就不会返回正确的Sec-WebSocket-Accept，则建立WebSocket连接失败</li>
-<li>服务端返回的Response是对于客户端的此次请求的,而不是之前的缓存。 主要是防止有些缓存服务器返回缓存的Response</li>
-</ul>
-<hr>
-<p>以上请求头跟响应头如果主要字段都没有出差错，那么本次连接则从HTTP连接升级到了WebSocket连接了。现在客户端就可以通过WebSocketAPI来接收服务端推送的消息了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建WebSocket连接</span></span><br><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">'ws://WebSocket-example:8081'</span>)</span><br><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line"><span class="comment">// 错误处理</span></span><br><span class="line">ws.onerror = <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// todo</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 连接建立是调用</span></span><br><span class="line">ws.onopen = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 向server发送消息</span></span><br><span class="line">  ws.send(<span class="string">'connected'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接收server发送的消息</span></span><br><span class="line">ws.onmessage = <span class="function">(<span class="params">msg</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// todo</span></span><br><span class="line">  <span class="keyword">if</span> (msg.data <span class="keyword">instanceof</span> Blob) &#123;</span><br><span class="line">    <span class="comment">// 处理二进制信息</span></span><br><span class="line">    reader.readAsText(msg.data, <span class="string">'UTF-8'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//关闭时调用</span></span><br><span class="line">ws.onclose = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>之前前端er便可以愉快的接收服务端主动推送的消息啦~~<br>但是有个问题：很多现有的HTTP 中间设备可能不理解新的WebSocket 协议，而这可能导致各种问题：盲目的连接升级、意外缓冲WebSocket 帧、不明就里地修改内容、把WebSocket 流量误当作不完整的HTTP 通信，等等。这时WSS（<strong>WSS协议表示使用加密信道通信，基于SSL的安全传输，占用与tls相同的443端口</strong>）就提供了一种不错的解决方案，它建立一条端到端的安全通道，这个端到端的加密隧道对中间设备模糊了数据，因此中间设备就不能再感知到数据内容，也就无法再对请求做特殊处理。</p>
+<p>接下来继续判断用户所在系统是Android还是IOS,且用户是否在浏览器中。<br>由于这个项目是嵌入在APP当中,所以如果要判断用户当前是否是在APP当中,则需要Android和IOS工程师在打壳的时候修改userAgent,加入我们想要的字段。<br>以下是Android打壳时候的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.userAgent = &apos;xxx&apos;</span><br></pre></td></tr></table></figure></p>
+<p>端工程师帮我们修改完userAgent之后我们便可以来做判断了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isApp = <span class="regexp">/xxxx/i</span>.test(<span class="built_in">window</span>.navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isAndroid = <span class="regexp">/android/i</span>.test(<span class="built_in">window</span>.navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isIOS = <span class="regexp">/ios/i</span>.test(<span class="built_in">window</span>.navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isWeixin = <span class="regexp">/micromessenger/i</span>.test(navigator.userAgent)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isWeChat = isWeixin</span><br></pre></td></tr></table></figure></p>
+<p>至此,用以上两个方法便可完成依据网络状况及系统类型的一些需求了。</p>
 
       
 
@@ -226,7 +191,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WebSocket</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">移动端</a>
         		</li>
       		
 		</ul>
@@ -245,9 +214,18 @@
   
 <nav id="article-nav">
   
+    <a href="/post/webSocket-1.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          浅析WebSocket（一）
+        
+      </div>
+    </a>
   
-    <a href="/post/webSocket-1.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">浅析WebSocket（一）</div>
+  
+    <a href="/post/linux.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端也应该懂的 Linux 命令</div>
       <i class="icon-circle-right"></i>
     </a>
   
