@@ -9,6 +9,7 @@
 	min-height: 500px;
 }
 .instagram img {
+	max-height: 163px;
 	width: 100%;
 }
 .instagram .year {
