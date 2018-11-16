@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="//amorcy.cc">
   <title>浅析WebSocket（二） | Amorcy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
+  <meta name="description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，而Comet则是一种服务器向页面推送数据的技术，Comet能够让信息近乎实">
 <meta name="keywords" content="前端,WebSocket">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅析WebSocket（二）">
 <meta property="og:url" content="//amorcy.cc/post/webSocket-2.html">
 <meta property="og:site_name" content="Amorcy">
-<meta property="og:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
+<meta property="og:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，而Comet则是一种服务器向页面推送数据的技术，Comet能够让信息近乎实">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="//amorcy.cc/img/websocket/wsReqH.jpeg">
 <meta property="og:image" content="//amorcy.cc/img/websocket/wsResH.jpeg">
-<meta property="og:updated_time" content="2018-11-16T03:28:45.495Z">
+<meta property="og:updated_time" content="2018-11-16T05:30:02.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析WebSocket（二）">
-<meta name="twitter:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实">
+<meta name="twitter:description" content="在上一篇文章浅析WebSocket（一），我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，而Comet则是一种服务器向页面推送数据的技术，Comet能够让信息近乎实">
 <meta name="twitter:image" content="//amorcy.cc/img/websocket/wsReqH.jpeg">
   
   
@@ -172,7 +172,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在上一篇文章<a href="//amorcy.cc//2018/11/14/webSocket-1/">浅析WebSocket（一）</a>，我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，儿Comet则是一种副武器箱页面推送数据的技术，Comet能够让信息近乎实时的被推送到页面上，非常适合处理体育比赛的分数跟股票。它有两种实现方式，一种就是我们之前提到的长轮询，还有一种是HTTP流，感兴趣的同学可以参考<a href="https://www.ibm.com/developerworks/cn/web/wa-lo-comet/index.html" target="_blank" rel="noopener">传送门</a>了解它是如何实现的。</p>
+        <p>在上一篇文章<a href="//amorcy.cc//2018/11/14/webSocket-1/">浅析WebSocket（一）</a>，我们了解到了WebSocket出现的背景，聪明的工程师们，为了能够实现前后端实时通讯，在WebSocket出现之前，还发明了Comet(Alex Russell发明的词儿)，他指的是一种更高级的Ajax技术（也经常被人们称为“服务端推送”）。Ajax是一种从页面向服务请求数据的技术，而Comet则是一种服务器向页面推送数据的技术，Comet能够让信息近乎实时的被推送到页面上，非常适合处理体育比赛的分数跟股票。它有两种实现方式，一种就是我们之前提到的长轮询，还有一种是HTTP流，感兴趣的同学可以参考<a href="https://www.ibm.com/developerworks/cn/web/wa-lo-comet/index.html" target="_blank" rel="noopener">传送门</a>了解它是如何实现的。</p>
 <a id="more"></a>
 <hr>
 <p>WebSocket通信协议包含两个高层组件：开发性的HTTP握手用于协商连接参数、二进制消息分帧机制用于支持低开销的基于消息的文本和二进制数据传输。WebSocket 协议尝试在既有HTTP 基础设施中实现双向HTTP 通信，因此也使用HTTP 的80 和443 端口。不过，这个设计不限于通过HTTP 实现WebSocket 通信，未来的实现可以在某个专用端口上使用更简单的握手，而不必重新定义一个协议。WebSocket 协议是一个独立完善的协议，可以在浏览器之外实现。不过，它的主要应用目标还是实现浏览器应用的双向通信。</p>
@@ -377,6 +377,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
@@ -386,10 +390,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
               </li>
             
             <div class="clearfix"></div>
