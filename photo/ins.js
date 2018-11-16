@@ -118,7 +118,7 @@
         for (var i = 0, len = data.link.length; i < len; i++) {
           // var minSrc = 'http://p6pqytu6y.bkt.clouddn.com/min_photos/' + data.link[i];
           // var src = 'http://p6pqytu6y.bkt.clouddn.com/photos/' + data.link[i];
-          var minSrc = '//amorcy.cc/img/photo/' + data.link[i];
+          var minSrc = '//amorcy.cc/img/min_photo/' + data.link[i];
           var src = '//amorcy.cc/img/photo/' + data.link[i];
           var type = data.type[i];
           var target = src + (type === 'video' ? '.mp4' : '.jpg');
@@ -126,7 +126,7 @@
 
           liTmpl += '<figure class="thumb" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">\
                 <a href="' + src + '" itemprop="contentUrl" data-size="1080x1080" data-type="' + type + '" data-target="' + src + '">\
-                  <img class="reward-img" data-type="' + type + '" data-src="' + minSrc + '" src="/assets/img/empty.png" itemprop="thumbnail" onload="lzld(this)">\
+                  <img class="reward-img" data-type="' + type + '" data-src="' + minSrc + '" src="' + src + '" itemprop="thumbnail" onload="lzld(this)">\
                 </a>\
                 <figcaption style="display:none" itemprop="caption description">' + data.text[i] + '</figcaption>\
             </figure>';
