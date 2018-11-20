@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//amorcy.cc">
-  <title>相册 | Amorcy</title>
+  <title>前端进阶--柯里化函数 | Amorcy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Photos 	Videos  暂无视频">
-<meta name="keywords" content="前端, jquery, avalon, vue, nginx, 移动端">
-<meta property="og:type" content="website">
-<meta property="og:title" content="相册">
-<meta property="og:url" content="//amorcy.cc/photo/video.html">
+  <meta name="description" content="在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。  柯里化拥有三个特性： 参数复用我们举个🌰来了解什么是参数复用。购物街马上到了,小苗想要在购物节来临之前列出清单,以便在购物节的时候有目的性的剁手。目前她只确定了需要在购物街的时候买一部手机,其他的商品还没有想好。此时我们可以通">
+<meta name="keywords" content="前端,柯里化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端进阶--柯里化函数">
+<meta property="og:url" content="//amorcy.cc/post/currying.html">
 <meta property="og:site_name" content="Amorcy">
-<meta property="og:description" content="Photos 	Videos  暂无视频">
+<meta property="og:description" content="在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。  柯里化拥有三个特性： 参数复用我们举个🌰来了解什么是参数复用。购物街马上到了,小苗想要在购物节来临之前列出清单,以便在购物节的时候有目的性的剁手。目前她只确定了需要在购物街的时候买一部手机,其他的商品还没有想好。此时我们可以通">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-15T12:55:52.645Z">
+<meta property="og:updated_time" content="2018-11-20T09:26:18.101Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="相册">
-<meta name="twitter:description" content="Photos 	Videos  暂无视频">
+<meta name="twitter:title" content="前端进阶--柯里化函数">
+<meta name="twitter:description" content="在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。  柯里化拥有三个特性： 参数复用我们举个🌰来了解什么是参数复用。购物街马上到了,小苗想要在购物节来临之前列出清单,以便在购物节的时候有目的性的剁手。目前她只确定了需要在购物街的时候买一部手机,其他的商品还没有想好。此时我们可以通">
   
   
     <link rel="icon" href="/img/favicon.jpeg">
@@ -159,36 +159,45 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-photos" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-currying" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      相册
+      前端进阶--柯里化函数
     </h1>
   
 
+        
+        <a href="/post/currying.html" class="archive-article-date">
+  	<time datetime="2017-11-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+</a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <link rel="stylesheet" href="./ins.css">
-<div class="photos-btn-wrap">
-	<a class="photos-btn" href="/photos">Photos</a>
-	<a class="photos-btn active" href="/photos/videos.html">Videos</a>
-</div>
-<center><h1>暂无视频</h1></center>
-<hr>
-<center>
-<div class="video-container">
-
-</div>
-</center>
-
-
+        <blockquote>
+<p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。</p>
+</blockquote>
+<p>柯里化拥有三个特性：</p>
+<h6 id="参数复用"><a href="#参数复用" class="headerlink" title="参数复用"></a>参数复用</h6><p>我们举个🌰来了解什么是参数复用。<br>购物街马上到了,小苗想要在购物节来临之前列出清单,以便在购物节的时候有目的性的剁手。目前她只确定了需要在购物街的时候买一部手机,其他的商品还没有想好。此时我们可以通过以下函数来帮你记录她需要的商品<br><a id="more"></a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curryingGoods</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> args = [].slice.call(<span class="built_in">arguments</span> ,<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> innerArgs = [].slice.call(<span class="built_in">arguments</span>)</span><br><span class="line">    <span class="keyword">let</span> finalArgs = args.concat(innerArgs)</span><br><span class="line">    <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, finalArgs)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callBack</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> args = [].slice.call(<span class="built_in">arguments</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(args.join(<span class="string">','</span>), <span class="string">'----&gt;allGoods'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> getAllGoods = curryingGoods(callBack, <span class="string">'phone'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>一天后小苗想到了自己还需要买一些零食跟化妆品,此时她调用<code>getAllGoods</code>函数添加她想要的商品。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getAllGoods(<span class="string">'food'</span>, <span class="string">'cosmetics'</span>)</span><br><span class="line"><span class="comment">// phone, food, cosmetics, ----&gt;allGoods</span></span><br></pre></td></tr></table></figure></p>
+<p>又过了一天小苗朋友送给她许多零食跟化妆品, 小苗便将零食与化妆品在购物清单中去掉,她又想到想要买一双鞋子, 于是她继续调用<code>getAllGoods</code>函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getAllGoods(<span class="string">'shoes'</span>)</span><br><span class="line"><span class="comment">// phone, shoes, ----&gt;allGoods</span></span><br></pre></td></tr></table></figure></p>
+<p>我们可以看到,列表清单中没有了<strong>food, cosmetics</strong>但是多了<strong>shoes</strong>,而且从始至终<strong>phone</strong>一直都在(必须要买的)。</p>
+<p>通过这个🌰我们可以看到柯里化函数的主要工作就是将被返回函数的参数进行重写。柯里化函数的第一个参数就是要进行柯里化的函数,其它的参数是要传入的值。在后续的动作中,其他的参数是不变的, 变得只是<code>callBalk</code>的原始参数。我们看到无论<code>getAllGoods</code>函数传入什么参数<strong>phone</strong>是没有变化的, 即这个参数是一直被复用的。</p>
+<h6 id="提前返回"><a href="#提前返回" class="headerlink" title="提前返回"></a>提前返回</h6><p>有个典型的🌰, 在兼容IE浏览器添加事件时, 我们通常这么写:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addEvent = <span class="function"><span class="keyword">function</span>(<span class="params">el, type, fn, capture</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.addEventListener) &#123;</span><br><span class="line">        el.addEventListener(type, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            fn.call(el, e);</span><br><span class="line">        &#125;, capture);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.attachEvent) &#123;</span><br><span class="line">        el.attachEvent(<span class="string">"on"</span> + type, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            fn.call(el, e);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在我们每次调用<code>addEvent</code>函数时, 都会走一遍if<del>else, 我们用过使用柯里化这个函数便可以每次不用走if</del>else了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addEvent = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.addEventListener) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">el, type, fn, capture</span>) </span>&#123;</span><br><span class="line">          el.addEventListener(type, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            fn.call(el, e);</span><br><span class="line">          &#125;, capture);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.attachEvent) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">el, type, fn, capture</span>) </span>&#123;</span><br><span class="line">        el.attachEvent(<span class="string">"on"</span> + type, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            fn.call(el, e);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p>通过将这个函数柯里化之后, <code>addEvent</code>这个函数被提前返回赋值为新的函数了, 下次调用的时候便不再需要if~~else 判断了。</p>
+<h6 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h6><p>同样举个🌰, 小苗去买苹果,且需要买好几份。我们帮她设计一个函数来记录每份苹果的重量,便于最后算总价。已知苹果5元/斤。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTotalPrice</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> weightArrs = []</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      weightArrs = weightArrs.cancat([].plice.call(<span class="built_in">arguments</span>))</span><br><span class="line">      <span class="built_in">console</span>.log(weightArrs, <span class="string">'weightArrs'</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      fn.apply(<span class="literal">null</span>, weightArrs)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callBack</span>(<span class="params">pirce</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> totalPrice, totalWeight;</span><br><span class="line">    [].forEach.call(argument, (item)=&gt; &#123;</span><br><span class="line">      totalWeight += item</span><br><span class="line">    &#125;)</span><br><span class="line">    totalPrice = totalWeight * pirce</span><br><span class="line">    <span class="built_in">console</span>.log(totalPrice, <span class="string">'totalPrice'</span>)</span><br><span class="line">    <span class="keyword">return</span> totalPrice</span><br><span class="line">  &#125;   </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> getPrice = callback(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">let</span> totalPrice = getTotalPrice(getPrice)</span><br></pre></td></tr></table></figure></p>
+<p>函数设计好之后接下来<br>step1  小苗称了6斤的苹果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">totalPrice(<span class="number">6</span>)</span><br><span class="line"><span class="comment">// [6], weightArrs</span></span><br></pre></td></tr></table></figure></p>
+<p>step2  小苗称了10斤的苹果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">totalPrice(<span class="number">10</span>)</span><br><span class="line"><span class="comment">// [6, 10], weightArrs</span></span><br></pre></td></tr></table></figure></p>
+<p>step3  小苗称了5斤的苹果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">totalPrice(<span class="number">5</span>)</span><br><span class="line"><span class="comment">// [6, 10, 5], weightArrs</span></span><br></pre></td></tr></table></figure></p>
+<p>step4  小苗称了7斤的苹果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">totalPrice(<span class="number">7</span>)</span><br><span class="line"><span class="comment">// [6, 10, 5, 7], weightArrs</span></span><br></pre></td></tr></table></figure></p>
+<p>小苗买了四份之后准备结账了, 我们看到4份苹果分别为[6, 10, 5, 7], 接着我们继续调用<code>totalPrice</code>函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">totalPrice()</span><br><span class="line"><span class="comment">// 140, totalPrice</span></span><br></pre></td></tr></table></figure></p>
+<p>至此我们得到了4份苹果的总价为140。我们从这个🌰可以看出, 在小苗没有挑完苹果之前,即在调用<code>totalPrice</code>时传入参数是, 仅仅是记录了<strong>weightArrs</strong>这个数组。在挑选完苹果之后直接调用<code>totalPrice</code>函数, 不传入任何参数。便得出了4份苹果的总价。<br>以上便是函数的延迟调用。<br>我们观察延迟调用的🌰, 会发现我们在传入<strong>price</strong>的时候并没有在<code>totalPrice</code>中传入,且后面传入的几份苹果的重量,在函数执行完成的时候并没有被销毁。而是保存在了<strong>weightArrs</strong>中。<br>为了解答这个问题我们继续深入了解柯里化函数。 柯里化是函数式编程中的一个过程, <strong>可以将接受具有多个参数的函数转化为一个的嵌套函数队列</strong>, 然后返回一个新的函数以及期望下一个的内联参数。它不断返回一个新的函数直到所有的参数用完为止。这些参数会一直保持<strong>存活</strong>而不被销毁掉(<strong>此处使用了闭包的特性</strong>), 当柯里化链中最后的函数返回并执行时, 所有的函数都会用于执行。<br>换句话说就是柯里化利用了闭包的特性, 使得之前传入的参数不随函数的销毁而销毁, 而是保留了下来, 直到柯里化链中最后的函数返回执行时，柯里化链上的所有参数在此时都会被执行。</p>
 
       
 
@@ -197,6 +206,21 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">柯里化</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -208,6 +232,25 @@ var _hmt = _hmt || [];
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/post/getType.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          通过JS获取网络类型,及当前所在系统类型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/post/vue-router_1.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用webpack.require优化vue项目的路由</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -267,7 +310,7 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
